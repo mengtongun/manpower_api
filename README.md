@@ -43,7 +43,7 @@ DB_TABLE_PREFIX=test
 To launch uvicorn:
 
 ```
-uvicorn manpower_api.main:app --reload
+uvicorn manpower_api.main:app --reload --port=8000
 ```
 
 Then load the fancy interactive docs page at
