@@ -5,4 +5,3 @@ uvicorn
 pandas
 uuid
 bcrypt
-fastapi-limiter

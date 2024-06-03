@@ -22,6 +22,14 @@ python install -r requirement.txt
 
 #### Update Environment Variable
 
+Copy .env.example
+
+```
+cp .env.example .env
+```
+
+and update
+
 ```
 DB_USERNAME=sa
 DB_PASSWORD=pw
