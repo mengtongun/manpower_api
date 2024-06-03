@@ -46,9 +46,15 @@ To launch uvicorn:
 uvicorn manpower_api.main:app --reload --port=8000
 ```
 
-Then load the fancy interactive docs page at
+### Access Flutter Web Built
+
+```
+http://localhost:8000
+```
 
 ### API Documentation Swagger
+
+Then load the fancy interactive docs page at
 
 ```
 http://localhost:8000/docs

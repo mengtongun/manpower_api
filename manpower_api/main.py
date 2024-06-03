@@ -2,6 +2,7 @@ import time
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.sql import text
 
 from manpower_api.auth.router import router as auth_router
@@ -18,7 +19,7 @@ app = FastAPI(
 
 
 # Allow Client Domains
-origins = ["*"]
+origins = ["http://localhost:8001"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -46,6 +47,7 @@ async def health() -> dict[str, str]:
         print(e)
         return {"db": "down"}
 
-
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(employees_router, prefix="/v1/api", tags=["Employees"])
+
+app.mount("/", StaticFiles(directory="web", html=True), name="web")
