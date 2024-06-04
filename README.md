@@ -39,6 +39,11 @@ DB_TABLE_PREFIX=test
 ```
 Warning: In case got error cannot get env please restart terminal
 
+### Seed Dump Data for Testing
+```
+python seed.py
+```
+
 ### How to run:
 
 To launch uvicorn:
