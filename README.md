@@ -89,6 +89,7 @@ uvicorn manpower_api.main:app --port=8000
 ```
 
 ### Project Structure
+```
 manpower_api
 ├── manpower_api
 │   ├── auth
@@ -119,7 +120,7 @@ manpower_api
 ├── README.md
 ├── .env
 ├── .gitignore
-
+```
 Details at
 
 https://fastapi.tiangolo.com/tutorial/
