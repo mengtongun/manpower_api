@@ -70,7 +70,7 @@ http://localhost:8000/docs
 
 ### Clone Frontend Project
 ```
-cd https://github.com/mengtongun/manpower_app.git
+git clone https://github.com/mengtongun/manpower_app.git
 ```
 ### Setup and Install Dependencies
 ```
