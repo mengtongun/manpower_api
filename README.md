@@ -17,7 +17,7 @@ https://learn.microsoft.com/en-us/sql/connect/odbc/microsoft-odbc-driver-for-sql
 #### Install Dependencies
 
 ```
-python install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 #### Update Environment Variable
