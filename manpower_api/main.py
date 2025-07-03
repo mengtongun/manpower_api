@@ -6,10 +6,8 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.sql import text
 
 from manpower_api.auth.router import router as auth_router
-from manpower_api.database import Base, engine
+from manpower_api.database import engine
 from manpower_api.employees.router import router as employees_router
-
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Manpower API",

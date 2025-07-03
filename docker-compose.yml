@@ -1,0 +1,66 @@
+services:
+  # SQL Server Database
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: manpower_db
+    env_file:
+      - .env
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASSWORD}
+      - MSSQL_PID=Developer
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - manpower_network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools18/bin/sqlcmd -S localhost -U ${DB_USERNAME} -P ${DB_PASSWORD} -C -Q 'SELECT 1'",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 3s
+
+  # FastAPI Application
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manpower_api
+    env_file:
+      - .env
+    environment:
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_SERVER=${DB_SERVER}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_TABLE_PREFIX=${DB_TABLE_PREFIX}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - manpower_network
+    restart: unless-stopped
+    volumes:
+      - ./web:/app/web:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+volumes:
+  mssql_data:
+    driver: local
+
+networks:
+  manpower_network:
+    driver: bridge
